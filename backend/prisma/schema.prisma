@@ -9,7 +9,7 @@ datasource db {
 
 model Invoice {
   id              Int            @id @default(autoincrement())
-  name_client     String
+  number_client   String
   month_reference String
   expiration_date String
   total_value     String
@@ -25,7 +25,7 @@ model ItemsInvoice {
   name_item    String
   measure_unit String?
   quantity     String?
-  price_unit   String
+  price_unit   String?
   total_value  String
   Invoice      Invoice @relation(fields: [invoice_id], references: [id])
 

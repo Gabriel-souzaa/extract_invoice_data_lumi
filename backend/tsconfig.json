@@ -8,9 +8,13 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2019",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "build",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "allowJs": false
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
 }
