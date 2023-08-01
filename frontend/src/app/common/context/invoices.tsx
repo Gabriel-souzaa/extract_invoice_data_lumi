@@ -1,67 +1,51 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { IInvoiceData } from '../interface/invoices.interface'
+import { IInvoice, InvoiceHistory } from '../interface/invoices.interface'
 
 interface IInvoiceContext {
-  invoicesData: IInvoiceData[];
+  clientsData: IInvoice[];
+  reportData: IInvoice[];
   loading: boolean;
+  getClients: () => {};
+  getReport: (text: string, month: string) => {};
 }
 
 const InvoiceContext = createContext<IInvoiceContext>({} as IInvoiceContext);
 
 export function InvoiceContextProvider({ children }: { children: React.ReactNode }) {
-  const [invoicesData, setInvoicesData] = useState<IInvoiceData[]>([]);
+  const [clientsData, setclientsData] = useState<IInvoice[]>([]);
+  const [reportData, setReportData] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log("Setando os dados");
-    setInvoicesData(
-      [
-        {
-          id: 1,
-          number_client: "7202788969",
-          month_reference: "FEV/2023",
-          expiration_date: "08/03/2023",
-          total_value: "R$161,30",
-        },
-        {
-          id: 2,
-          number_client: "7202788969",
-          month_reference: "FEV/2023",
-          expiration_date: "08/03/2023",
-          total_value: "R$161,30",
-        },
-        {
-          id: 3,
-          number_client: "7202788969",
-          month_reference: "FEV/2023",
-          expiration_date: "08/03/2023",
-          total_value: "R$161,30",
-        },
-        {
-          id: 4,
-          number_client: "7202788969",
-          month_reference: "FEV/2023",
-          expiration_date: "08/03/2023",
-          total_value: "R$161,30",
-        }
-      ]
-    );
+
+    (async () => {
+      const res = await getClients();
+      await getReport('', '');
+      setclientsData(res);
+    })();
 
     setLoading(false);
   }, []);
 
-  const filterInvoices = async () => {
-    try {
-      const response = await fetch('https://api.example.com/data');
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Erro ao buscar dados da API:', error);
+  const getClients = async () => {
+    const response = await fetch('http://localhost:3001/api/invoice');
+    if (response.ok) {
+      return response.json();
     }
   }
 
+  const getReport = async (text: string, month: string) => {
+    const response = await fetch(`http://localhost:3001/api/invoice/filter?number_client=${text}&month=${month}`)
+    if (response.ok) {
+      const data = await response.json();
+      setReportData(data)
+      return;
+    }
+  }
+
+
   return (
-    <InvoiceContext.Provider value={{ invoicesData, loading }}>
+    <InvoiceContext.Provider value={{ clientsData, loading, getClients, reportData, getReport }}>
       {children}
     </InvoiceContext.Provider>
   );

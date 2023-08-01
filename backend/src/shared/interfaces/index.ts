@@ -1,1 +1,7 @@
-export { IInvoice } from './invoice.interface';
+export {
+  IInvoice,
+  ICratedInvoice,
+  MonthReferenceType,
+  InvoiceHistory,
+  IConsumptionHistory,
+} from './invoice.interface';

@@ -7,7 +7,7 @@ import { Roboto } from 'next/font/google'
 import { Providers } from './providers'
 import { DrawerComponent } from './common/components/Drawer.component';
 import { useState } from 'react';
-import { Button, Stack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 const inter = Roboto({ subsets: ['latin'], weight: '500' })
@@ -32,15 +32,13 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <Providers>
-          <Stack className='flex-row'>
-            <div className='flex h-screen bg-lime-200 w-10 justify-center items-center'>
+          <Box className='flex flex-row'>
+            <div className='flex h-screen bg-teal-200 w-16 justify-center items-center'>
               <HamburgerIcon boxSize={6} onClick={toggleDrawer} />
             </div>
 
-            <div className='p-5'>
-              {children}
-            </div>
-          </Stack>
+            {children}
+          </Box>
           <DrawerComponent isOpen={isOpen} onClose={toggleDrawer} />
         </Providers>
       </body>

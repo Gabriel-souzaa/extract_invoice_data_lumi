@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ExtractorController } from './extractor.controller';
 import { PrismaService, PdfReaderService } from '../../services';
 import { ExtractorUseCase } from './extractor.usecase';
-import { AntibioticPrismaRepository } from '../../data/remote';
+import { InvoicePrismaRepository } from '../../data/remote';
 
 @Module({
   imports: [],
@@ -11,7 +11,7 @@ import { AntibioticPrismaRepository } from '../../data/remote';
     PrismaService,
     PdfReaderService,
     ExtractorUseCase,
-    AntibioticPrismaRepository,
+    InvoicePrismaRepository,
   ],
 })
 export class ExtractorModule { }

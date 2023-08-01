@@ -1,1 +1,1 @@
-export { AntibioticPrismaRepository } from './invoice-prisma.repository';
+export { InvoicePrismaRepository } from './invoice-prisma.repository';

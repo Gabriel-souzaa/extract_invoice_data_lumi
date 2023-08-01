@@ -6,7 +6,6 @@ import {
   StatNumber,
   StatHelpText,
   StatArrow,
-  StatGroup,
 } from '@chakra-ui/react';
 
 interface IStatComponent {
@@ -19,7 +18,7 @@ interface IStatComponent {
 export const StatComponent: React.FC<IStatComponent> = ({ type, label, number, number_porcent }) => {
 
   return (
-    <Stat className='p-4 rounded-lg border-2 shadow-lg shadow-lime-200'>
+    <Stat className='p-4 rounded-lg border-2 shadow-lg shadow-teal-200'>
       <StatLabel>{label}</StatLabel>
       <StatNumber fontSize="2xl">{number}</StatNumber>
       {number_porcent && (

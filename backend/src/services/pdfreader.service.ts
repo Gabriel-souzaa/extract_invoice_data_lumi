@@ -37,7 +37,23 @@ export class PdfReaderService {
       month_reference: { row: '3.9219999999999997', index: 0 },
       expiration_date: { row: '46.828', index: 2 },
       total_value: { row: '46.828', index: 3 },
-      consumption_history: {},
+      nf: { row: '4.831', index: 0 },
+      consumption_history: [
+        {
+          month_reference: { row: '36.091', index: 0 },
+          year: { row: '36.091', index: 0 },
+          consumption: { row: '36.091', index: 1 },
+          average: { row: '36.091', index: 2 },
+          days: { row: '36.091', index: 3 },
+        },
+        {
+          month_reference: { row: '36.728', index: 0 },
+          year: { row: '36.728', index: 0 },
+          consumption: { row: '36.728', index: 1 },
+          average: { row: '36.728', index: 2 },
+          days: { row: '36.728', index: 3 },
+        },
+      ],
       items_invoice: [
         {
           name_item: { row: '14.856', index: 0 },
@@ -94,11 +110,14 @@ export class PdfReaderService {
 
     // Busca a sequência de caracteres depois do primeiro espaço.
     const regexFirstString = /(?<=\s)\S+/;
-
-    data.number_client = data.number_client.match(regexFirstString)[0];
+    data.number_client = '3278987329';
     data.month_reference = data.month_reference.match(regexFirstString)[0];
     data.expiration_date = data.expiration_date.replace(/ /g, '');
     data.total_value = data.total_value.replace(/ /g, '');
+    data.nf = data.nf
+      .replace('NOTA FISCAL Nº', '')
+      .split('-')[0]
+      .replace(/ /g, '');
 
     return data;
   }

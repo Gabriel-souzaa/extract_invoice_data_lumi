@@ -1,4 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  IConsumptionHistory,
+  InvoiceHistory,
+} from '../interfaces/invoice.interface';
 
 export class DisplayInvoiceDto {
   @ApiProperty()
@@ -8,11 +12,8 @@ export class DisplayInvoiceDto {
   number_client: string;
 
   @ApiProperty()
-  month_reference: string;
+  invoice_history: InvoiceHistory[];
 
   @ApiProperty()
-  expiration_date: string;
-
-  @ApiProperty()
-  total_value: string;
+  consumption_history: IConsumptionHistory[];
 }

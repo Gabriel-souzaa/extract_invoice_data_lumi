@@ -4,7 +4,16 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { UseCaseExceptionFilter } from './utils/filters/useCaseExpections.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      origin: true,
+      credentials: true,
+      methods: '*',
+      allowedHeaders: '*',
+      preflightContinue: false,
+      optionsSuccessStatus: 200,
+    },
+  });
 
   app.useGlobalFilters(new UseCaseExceptionFilter());
 
@@ -16,6 +25,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/doc', app, document);
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

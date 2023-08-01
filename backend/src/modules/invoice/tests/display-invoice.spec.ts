@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('Extractor Controller', () => {
+describe('Display invoice Controller', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
@@ -10,7 +10,7 @@ describe('Extractor Controller', () => {
     }).compile();
   });
 
-  describe('Extractor', () => {
+  describe('Display invoice', () => {
     it('should return "Extractor success"', () => {
       //const appController = app.get(ExtractorController);
       expect(1).toBe(1);
